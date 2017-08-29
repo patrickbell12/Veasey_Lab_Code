@@ -1,8 +1,6 @@
 from fpdf import FPDF
 import sys
 
-#TODO Because the program can not handle huge pic documents, the next approach will be dividing into two documents; one for each genotype. It would be ideal if the program took a command line argument to only work on one group creating a document with the name of the group eg. -> Bace group is in BACE_map.docx. This could then posibly be turned into a flat pdf for easy distribution.
-
 def word_space(x):
 	for i in range(x) :
 		pdf.ln()
@@ -13,16 +11,13 @@ page_height = 279.4
 page_width = 215.9
 pdf = FPDF('p','mm',(page_width,page_height))
 pdf.set_margins(25.4,25.4,-25.4)
-#pdf.set_font('Arial', 'B', 16)
-#pdf.cell(100,10.3,'Base and Tau KO amygdala map',1,2,'C')
-#pdf.set_font('Arial', '', 12)
 
 
 i = 0
 
-pic_width = 40
-x_distance = 50
-x_plus = x_distance + 50
+pic_width = 60
+x_distance = 30
+x_plus = x_distance + 65
 y_distance = 37.4
 
 tag_hold = ''
@@ -43,15 +38,15 @@ while True:
 
 	if group != sys.argv[1]:continue
 	
-	condition = pic_dets[2]
-	tag = pic_dets[3]
-	section = pic_dets[4]
+	condition = pic_dets[1]
+	tag = pic_dets[2]
+	section = pic_dets[3]
 	
 	name = group + ' ' + condition + ' ' + tag
 
 	if i%2 == 0: #triggers for L side (i=0 is first)
 		
-		if tag != tag_hold:
+		if tag != tag_hold or y_distance > (6*35+37.4):
 			tag_hold = tag
 			
 			pdf.add_page()
@@ -66,6 +61,7 @@ while True:
 				pdf.set_xy(x_distance, (page_number*page_height+y_distance))
 
 
+
 		pdf.image(pic,(x_distance),y_distance, pic_width)
 		pdf.set_xy(x_distance,y_distance)
 		pdf.cell(35,5,(name),1)
@@ -74,7 +70,7 @@ while True:
 		pdf.image(pic,(x_plus),y_distance, pic_width)
 		pdf.set_xy(x_plus,y_distance)
 		pdf.cell(35,5,(name),1)
-		y_distance += 35
+		y_distance += 46
 	i+=1
 
 
