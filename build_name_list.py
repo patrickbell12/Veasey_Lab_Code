@@ -7,6 +7,8 @@ directory = 'tif_files'
 if not os.path.exists(directory):
 	os.makedirs(directory)
 
+
+#the following path name needs to be updated for whichever directory you are working in
 for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/Pat_ayg-folder'):
 	for file in files:
 		if file.endswith('.tif'):
@@ -33,10 +35,5 @@ for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/Pat_ayg-
 			midfile.write('.jpeg')
 			midfile.write('\n')
 			
-for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/Pat_ayg-folder'):
-	for file in files:
-		if file.endswith('.jpeg'):
-			midfile.write(file)
-			midfile.write('\n')
 
 midfile.close()
