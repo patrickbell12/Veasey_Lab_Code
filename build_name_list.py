@@ -9,7 +9,8 @@ if not os.path.exists(directory):
 
 
 #the following path name needs to be updated for whichever directory you are working in
-for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/Pat_ayg-folder'):
+for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/MUT_study/MUT_CSS'):
+	files.sort()
 	for file in files:
 		if file.endswith('.tif'):
 			if not os.path.exists(file):
