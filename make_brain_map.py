@@ -12,49 +12,45 @@ page_width = 215.9
 pdf = FPDF('p','mm',(page_width,page_height))
 pdf.set_margins(25.4,25.4,-25.4)
 
-
-i = 0
-
 pic_width = 60
 x_distance = 30
 x_plus = x_distance + 65
 y_distance = 37.4
 
-tag_hold = ''
-
 page_number = 1
+
+i = 0
+
+animal_hold = ''
 
 while True:
 	pic_name = pic_names.readline()
-	
-#	if i == 24:break
 
 	if pic_name == '':break
 
 	pic = pic_name.strip('\n')
 	short_pic = pic.strip('.jpeg')
-	pic_dets = pic.split('_')
-	group = pic_dets[0]
+	pic_dets = short_pic.split('_')
+	animal = pic_dets[0]
 
-	if group != sys.argv[1]:continue
+	if animal != sys.argv[1]:continue
 	
-	condition = pic_dets[1]
-	tag = pic_dets[2]
-	section = pic_dets[3]
+	region = pic_dets[1]
 	
-	name = group + ' ' + condition + ' ' + tag
+	name = animal + ' ' + region
 
 	if i%2 == 0: #triggers for L side (i=0 is first)
-		
-		if tag != tag_hold or y_distance > (6*35+37.4):
-			tag_hold = tag
+		#reset to top of new page when starting an animal or when lower limit of page is reached	
+		if animal != animal_hold or y_distance > (6*35+37.4):
 			
+			animal_hold = animal
+
 			pdf.add_page()
 			page_number +=1
 			y_distance = 37.4
 			
 			pdf.set_font('Arial', 'B', 16)
-			pdf.cell(170,10.3,'Base and Tau KO amygdala map '+pic,1,2,'C')
+			pdf.cell(170,10.3,pic,1,2,'C')
 			pdf.set_font('Arial', '', 12)
 			
 			if i!=0:
@@ -70,7 +66,7 @@ while True:
 		pdf.image(pic,(x_plus),y_distance, pic_width)
 		pdf.set_xy(x_plus,y_distance)
 		pdf.cell(35,5,(name),1)
-		y_distance += 46
+		y_distance += 65 #This is specificly for these MUT pics which are longer in the y direction than most images. Normally should by 36 pixels.
 	i+=1
 
 
