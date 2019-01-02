@@ -9,7 +9,7 @@ if not os.path.exists(directory):
 
 
 #the following path name needs to be updated for whichever directory you are working in
-for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/MUT_study/MUT_CSS'):
+for root, dirs, files in os.walk(os.path.dirname(os.path.abspath(__file__))):
 	files.sort()
 	for file in files:
 		if file.endswith('.tif'):
@@ -22,15 +22,10 @@ for root, dirs, files in os.walk('/Users/patrickbell/Desktop/Veasey_Lab/MUT_stud
 			name = file
 			name = name.split('.')[0]
 			
-			command = 'convert %s.tif %s.jpeg'%(name,name)
+			os.system('convert %s.tif %s.jpeg'%(name,name))
 
-			os.system(command)
+			os.system('mv %s.tif tif_files'%name)
 
-			command = 'mv %s.tif tif_files'%name
-
-			os.system(command)
-
-			print command
 #			raw_input()
 			midfile.write(name)
 			midfile.write('.jpeg')
