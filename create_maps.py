@@ -14,20 +14,18 @@ pic_list = 'Pic_names.txt'
 if os.path.exists(pic_list):
 	name_file=open(pic_list,'r')
 else:
-	command = 'python build_name_list.py'
+        print "Name List does not exist"
+        command = 'python build_name_list.py'
 	os.system(command)
 	name_file = open(pic_list,'r')
 
 
 while True:
 	pic_name = name_file.readline()
-#	print pic_name
 
 	if pic_name == '':break
 
 	number = pic_name.split('_')[0]
-
-#	print number
 
 	if number != old_number:
 		old_number = number
