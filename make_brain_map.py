@@ -1,3 +1,5 @@
+#Dimentions are currently optomized for MUT project
+
 from fpdf import FPDF
 import sys
 
@@ -24,20 +26,28 @@ i = 0
 animal_hold = ''
 
 while True:
-	pic_name = pic_names.readline()
+	#cycle through all names on the list and pick out the one we are working on as 
+        #stated by sys.argv[1] in command line
+        
+        pic_name = pic_names.readline()
 
 	if pic_name == '':break
 
 	pic = pic_name.strip('\n')
 	short_pic = pic.strip('.jpeg')
-	pic_dets = short_pic.split('_')
-	animal = pic_dets[0]
+        pic_dets = short_pic.split('_')
 
+        #animal number
+        animal = pic_dets[0]
+
+        #find animal in question
 	if animal != sys.argv[1]:continue
 	
-	region = pic_dets[1]
+
+        #condition ie MUT, NLSEQ etc.
+	condition = pic_dets[1]
 	
-	name = animal + ' ' + region
+	name = animal + ' ' + condition
 
 	if i%2 == 0: #triggers for L side (i=0 is first)
 		#reset to top of new page when starting an animal or when lower limit of page is reached	
